@@ -9,14 +9,15 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Course {
 
     private final DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-mm-yyyy");
     private final String courseName;
-    private final ArrayList modules = new ArrayList();
-    private final ArrayList students = new ArrayList();
+    private final HashMap<Module, String> modules = new HashMap();
+    private final HashMap<Student, Integer> students = new HashMap();
     private final LocalDate startDate;
     private final LocalDate endDate;
 
@@ -39,21 +40,19 @@ public class Course {
     }
 
     public void addModule(final Module module) {
-        this.modules.add(module);
+        this.modules.put(module, module.getModuleID());
         for (final Student student : module.getStudents()) {
-            students.add(student);
+            students.put(student, student.getStudentID());
             student.setCourse(this);
         }
     }
 
     public ArrayList<Module> getModules() {
-        return this.modules;
-        //return modules;
+        return new ArrayList (modules.values());
     }
 
     public ArrayList<Student> getStudents() {
-        return this.students;
-        //return students;
+        return new ArrayList (students.values());
     }
 
     @Override

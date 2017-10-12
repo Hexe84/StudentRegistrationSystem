@@ -6,13 +6,13 @@ package studentregistrationsystem;
  */
 
 import java.util.ArrayList;
-//import java.util.HashMap;
+import java.util.HashMap;
 
 public class Module {
 
     public String moduleName;
     public String moduleID;
-    private final ArrayList students = new ArrayList();
+    private final HashMap<Student, Integer> students = new HashMap();
 
     public Module(final String name, final String id) {
         this.moduleName = name;
@@ -28,13 +28,12 @@ public class Module {
     }
 
     public void addStudent(final Student student) {
-        this.students.add(student);
+        this.students.put(student, student.getStudentID());
         student.addModule(this);
     }
 
     public ArrayList<Student> getStudents() {
-        return students;
-        //return this.students;
+        return new ArrayList (students.values());
     }
 
     @Override
