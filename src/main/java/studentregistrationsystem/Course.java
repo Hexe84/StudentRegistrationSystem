@@ -17,7 +17,7 @@ public class Course {
     private final DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-mm-yyyy");
     private final String courseName;
     private final HashMap<Module, String> modules = new HashMap();
-    private final HashMap<Student, Integer> students = new HashMap();
+    private final HashMap<Integer, Student> students = new HashMap();
     private final LocalDate startDate;
     private final LocalDate endDate;
 
@@ -42,7 +42,7 @@ public class Course {
     public void addModule(final Module module) {
         this.modules.put(module, module.getModuleID());
         for (final Student student : module.getStudents()) {
-            students.put(student, student.getStudentID());
+            students.put(student.getStudentID(),student);
             student.setCourse(this);
         }
     }

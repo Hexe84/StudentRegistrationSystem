@@ -12,7 +12,7 @@ public class Module {
 
     public String moduleName;
     public String moduleID;
-    private final HashMap<Student, Integer> students = new HashMap();
+    private final HashMap<Integer, Student> students = new HashMap();
 
     public Module(final String name, final String id) {
         this.moduleName = name;
@@ -28,7 +28,7 @@ public class Module {
     }
 
     public void addStudent(final Student student) {
-        this.students.put(student, student.getStudentID());
+        this.students.put(student.getStudentID(), student);
         student.addModule(this);
     }
 
